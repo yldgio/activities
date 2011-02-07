@@ -1,0 +1,28 @@
+- activity = task.recurring_activity
+%tr{:class=>activity.status}
+  - form_for(activity) do |f|
+    = hidden_field_tag :recurring, task.recurring
+    = f.hidden_field :task_id
+    = f.hidden_field :description
+    %td.info
+      = image_tag('information.png', :title=>"#{task.name} info")
+      %span.info
+        %p
+          Description:
+          != task.description
+        %p
+          Notes:
+          != task.notes  
+    %td
+      = f.text_field :name, :placeholder=> task.name, :size=>30
+    %td
+      = f.text_area :notes, :cols=>40, :rows=>2
+    %td
+      = f.number_field :duration, :min=>'1',:max=>'480', :step=>'1', :size=>3
+    %td
+      = f.select :status, Activity::STATUS
+    %td
+      = f.select :user_id, User.where(:role=>'editor').map{|user|[user.email, user.id]}
+    %td
+      = f.submit
+

@@ -1,0 +1,12 @@
+# Typus Roles Configuration File
+#
+# Use the README file as a reference to customize settings.
+
+admin:
+  Activity: all
+  Task: all
+
+editor:
+  Activity: create, read, update, delete
+  Task: read, update
+

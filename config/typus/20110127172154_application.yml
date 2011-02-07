@@ -1,0 +1,35 @@
+# Typus Models Configuration File
+#
+# Use the README file as a reference to customize settings.
+Task:
+  fields:
+    default: name, description, recurring, notes, settings
+    form: name, description, recurring, notes
+    options: 
+      selectors: recurring
+  order_by: name
+  relationships: activities
+  filters: recurring
+  search: name, description
+  application: Activities
+  description: Task Administration
+  export: csv, xml
+  options:
+    action_after_save: index
+
+Activity:
+  fields:
+    default: name, description, duration, notes, task, status, author
+    form: name, description, duration, notes, status, author
+    options: 
+      selectors: status
+  order_by: -created_at
+  relationships: task, author
+  filters: created_at, status, task, author
+  search: name
+  application: Activities
+  description: Activities Administration
+  export: csv, xml
+  options:
+    action_after_save: index
+

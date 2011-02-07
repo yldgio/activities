@@ -1,0 +1,17 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  name: MyString
+  description: MyText
+  type: MyString
+  notes: MyText
+  belong_to: 
+  status: MyString
+
+two:
+  name: MyString
+  description: MyText
+  type: MyString
+  notes: MyText
+  belong_to: 
+  status: MyString

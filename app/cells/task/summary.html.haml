@@ -1,0 +1,13 @@
+%section#summary
+  %h3
+    Summary for #{@from.to_date.to_s(:long)}
+  %table
+    - @summary.each do |scheduling, config|
+      %tr
+        %th{:colspan=>"2"}
+          = " #{config[:due_tasks].count} #{scheduling.to_s.humanize} attività previste"
+      - config[:activities].each do |activity|
+        %tr{:class=>activity.status}
+          %td.activity_report
+            #{activity.num} activities in status #{activity.status} created on #{activity.created_at.to_s(:short)}
+

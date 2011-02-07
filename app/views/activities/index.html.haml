@@ -1,0 +1,50 @@
+%nav
+  %h3
+    = "All activities recurring #{@recurring}"
+  %ul
+    - Task::RECURRING.each do |recurring|
+      %li{:class=> @recurring == recurring && 'current'}
+        = link_to("View all recurring #{recurring}", :action=>:index, :recurring=>recurring)
+.activities
+  %p.notice= flash[:notice]
+  %table
+    %caption 
+      instructions
+      %p.errors= flash[:errors]
+      %p
+        = link_to("#", :id => "toggle_completed") do
+          %span hide completed
+          %span{:style=>"display: none"} show completed
+    %colgroup/
+    %colgroup{:span=>"7", :title=>"title"}/
+    %thead
+      %tr
+        -%w(info name notes duration status author apply_changes).each do |col|
+          %th{:scope=>"col"}= col.humanize
+      -if @tasks.blank?
+        %tr
+          %th{:colspan=>"7"}
+            no tasks recurring #{@recurring}
+    %tbody
+      -@tasks.each do |task|
+        = render :partial=>'form', :locals=>{:task=>task}
+
+= content_for :script do
+  :javascript
+    $('#toggle_completed').click(function() {
+    $('tr.completed').fadeToggle("fast", "linear");
+    $('#toggle_completed span').toggle();
+    return false;
+    });
+    $('td.info').hover(
+    function(){
+    $(this).children("span").show();
+    },
+    function(){
+    $(this).children("span").hide();
+    }
+    );
+
+
+
+
